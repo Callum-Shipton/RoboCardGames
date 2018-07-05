@@ -23,7 +23,12 @@ class HigherOrLower:
 		previousCard = self.topCard
 		self.topCard = self.deck.pop()
 		
+		print(previousCard.value)
+		print(self.topCard.value)
+		
 		compareValue = self.topCard.compare(previousCard)
+		
+		print(compareValue)
 		
 		if move == "higher":
 			if compareValue == 1: self.score += 1

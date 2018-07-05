@@ -1,3 +1,5 @@
+import random
+
 class Card:
 	def __init__(self, number, suit):
 		self.number = number
@@ -23,6 +25,13 @@ class Deck:
 	
 	def shuffle(self):
 		print("Shuffling")
+		
+		for index in range(len(self.cards)):
+			card1 = self.cards.pop(index)
+			rand = random.randint(0, index)
+			card2 = self.cards.pop(rand)
+			self.cards.insert(index, card2)
+			self.cards.insert(rand, card1)
 		
 	def pop(self):
 		return self.cards.pop(0)
