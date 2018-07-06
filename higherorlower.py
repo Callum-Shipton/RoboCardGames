@@ -18,7 +18,9 @@ class HigherOrLower:
 		if move != "higher" and move != "lower":
 			print ("Error: Bad input, Expected higher or lower")
 			print(self.topCard.toString())
-			return
+			return Response(self.topCard, false)
+		
+		success = false;
 	
 		previousCard = self.topCard
 		self.topCard = self.deck.pop()
@@ -26,10 +28,14 @@ class HigherOrLower:
 		compareValue = self.topCard.compare(previousCard)
 		
 		if move == "higher":
-			if compareValue == 1: self.score += 1
+			if compareValue == 1: 
+				self.score += 1
+				success = true
 			elif compareValue == -1: self.score -= 1
 		elif move == "lower":
-			if compareValue == 1: self.score -= 1
+			if compareValue == 1: 
+				self.score -= 1
+				success = true
 			elif compareValue == -1: self.score += 1
 	
 		
@@ -37,6 +43,13 @@ class HigherOrLower:
 		print("Score:")
 		print(self.score)
 		
+		return Response(self.topCard, success)
+		
+	def getState(self):
 		return self.topCard
 	
+class Response:
+	def __init__(self, gameState, success):
+		self.gameState = gameState
+		self.success = success
 	

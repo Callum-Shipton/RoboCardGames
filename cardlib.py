@@ -32,6 +32,7 @@ class Deck:
 	
 	def shuffle(self):
 		print("Shuffling")
+		random.seed(31415)
 		random.shuffle(self.cards)
 		
 	def pop(self):
