@@ -1,9 +1,22 @@
 import higherorlower
+import kerasnn_01
 
-game = higherorlower.HigherOrLower()
+numberOfGames = 140
 
-game.start()
+ai = kerasnn_01.KerasNN()
 
-for i in range(10):
-	input = raw_input('Higher or Lower?: ')
-	game.giveMove(input)
+for runId in range(0, numberOfGames):
+    game = higherorlower.HigherOrLower()
+
+    state = game.start()
+
+    for card in range(1,51):
+        input = ai.getMove(state)
+        print(input)
+        response = game.giveMove(input)
+        state = response.gameState
+        ai.storeResponse(response.success)
+    print("Score: ")
+    print(game.score)
+
+    ai.train()
